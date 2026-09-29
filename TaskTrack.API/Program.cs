@@ -12,8 +12,9 @@ var connectionString = builder.Configuration["DATABASE_URL"]
 if (string.IsNullOrWhiteSpace(connectionString))
     throw new InvalidOperationException("Connection string 'DefaultConnection' is not configured.");
 
-// Support Render-style DATABASE_URL (postgres://user:pass@host/db)
-if (connectionString.StartsWith("postgres://", StringComparison.OrdinalIgnoreCase))
+// Support Render-style PostgreSQL URLs (postgres:// or postgresql://user:pass@host/db)
+if (connectionString.StartsWith("postgres://", StringComparison.OrdinalIgnoreCase)
+    || connectionString.StartsWith("postgresql://", StringComparison.OrdinalIgnoreCase))
     connectionString = ConvertPostgresUrl(connectionString);
 
 builder.Services.AddDbContext<TaskManagementContext>(options =>
