@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: tasktrack-api
+    runtime: docker
+    dockerfilePath: ./TaskTrack.API/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/summary
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: DATABASE_URL
+        sync: false
+      - key: FrontendUrl
+        sync: false
