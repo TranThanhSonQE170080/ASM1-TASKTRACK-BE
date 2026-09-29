@@ -2,6 +2,7 @@ services:
   - type: web
     name: tasktrack-api
     runtime: docker
+    plan: free
     dockerfilePath: ./TaskTrack.API/Dockerfile
     dockerContext: .
     healthCheckPath: /api/summary
@@ -9,6 +10,14 @@ services:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: tasktrack-db
+          property: connectionString
       - key: FrontendUrl
         sync: false
+
+databases:
+  - name: tasktrack-db
+    databaseName: tasktrackdb
+    user: tasktrack
+    plan: free

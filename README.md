@@ -13,10 +13,9 @@ Do not commit database credentials. Production uses the `DATABASE_URL` environme
 
 ## Render deployment
 
-Create a PostgreSQL database on Render and deploy this repository using the included `render.yaml` Blueprint. Configure these web service environment variables in Render:
+Deploy this repository using the included `render.yaml` Blueprint. It creates a free web service and a free PostgreSQL database. Configure this web service environment variable in Render:
 
-- `DATABASE_URL`: Render PostgreSQL external or internal connection URL, according to the selected networking setup.
 - `FrontendUrl`: the deployed Vercel origin, for example `https://your-project.vercel.app`.
 - `ASPNETCORE_ENVIRONMENT`: set to `Production` (the Blueprint sets this by default).
 
-Run `TaskManagementDB_Postgres.sql` against the Render database before using the API. The health check is `/api/summary`; Swagger is enabled only in Development.
+Run `TaskManagementDB_Postgres.sql` against the Render database before using the API. Render's free PostgreSQL database expires after 30 days; upgrade it or choose another hosted PostgreSQL provider for persistent data. The health check is `/api/summary`; Swagger is enabled only in Development.
