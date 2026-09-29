@@ -1,0 +1,5 @@
+bin/
+obj/
+*.user
+.env
+TaskTrack.API/appsettings.Development.json
