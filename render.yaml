@@ -5,7 +5,8 @@ services:
     plan: free
     dockerfilePath: ./TaskTrack.API/Dockerfile
     dockerContext: .
-    healthCheckPath: /api/summary
+    healthCheckPath: /health
+    initialDeployHook: 'psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /app/TaskManagementDB_Postgres.sql'
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production

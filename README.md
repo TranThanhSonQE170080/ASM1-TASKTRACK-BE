@@ -18,4 +18,4 @@ Deploy this repository using the included `render.yaml` Blueprint. It creates a 
 - `FrontendUrl`: the deployed Vercel origin (the Blueprint sets `https://asm-1-tasktrack-fe.vercel.app`).
 - `ASPNETCORE_ENVIRONMENT`: set to `Production` (the Blueprint sets this by default).
 
-Run `TaskManagementDB_Postgres.sql` against the Render database before using the API. Render's free PostgreSQL database expires after 30 days; upgrade it or choose another hosted PostgreSQL provider for persistent data. The health check is `/api/summary`; Swagger is enabled only in Development.
+The first successful web-service deploy runs `TaskManagementDB_Postgres.sql` once through the Blueprint's initial deploy hook. Render's free PostgreSQL database expires after 30 days; upgrade it or choose another hosted PostgreSQL provider for persistent data. The health check is `/health`; Swagger is enabled only in Development.

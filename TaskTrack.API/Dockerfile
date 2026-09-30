@@ -7,6 +7,7 @@ RUN dotnet restore TaskTrack.API/TaskTrack.API.csproj && \
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends postgresql-client && rm -rf /var/lib/apt/lists/*
 COPY --from=build /app/publish .
-ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT}
-ENTRYPOINT ["dotnet", "TaskTrack.API.dll"]
+COPY TaskManagementDB_Postgres.sql .
+ENTRYPOINT ["sh", "-c", "ASPNETCORE_URLS=http://0.0.0.0:${PORT:-10000} dotnet TaskTrack.API.dll"]
