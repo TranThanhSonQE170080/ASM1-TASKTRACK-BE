@@ -14,7 +14,7 @@ services:
           name: tasktrack-db
           property: connectionString
       - key: FrontendUrl
-        sync: false
+        value: https://asm-1-tasktrack-fe.vercel.app
 
 databases:
   - name: tasktrack-db
