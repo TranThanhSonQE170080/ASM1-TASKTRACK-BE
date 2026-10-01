@@ -77,5 +77,6 @@ static string ConvertPostgresUrl(string url)
     var uri = new Uri(url);
     var userInfo = uri.UserInfo.Split(':', 2);
     var db = uri.AbsolutePath.TrimStart('/');
-    return $"Host={uri.Host};Port={uri.Port};Database={db};Username={Uri.UnescapeDataString(userInfo[0])};Password={Uri.UnescapeDataString(userInfo[1])}";
+    var port = uri.Port > 0 ? uri.Port : 5432;
+    return $"Host={uri.Host};Port={port};Database={db};Username={Uri.UnescapeDataString(userInfo[0])};Password={Uri.UnescapeDataString(userInfo[1])}";
 }
