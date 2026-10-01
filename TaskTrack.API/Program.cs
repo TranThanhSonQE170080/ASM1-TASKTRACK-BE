@@ -47,6 +47,7 @@ builder.Services.AddCors(options =>
             "http://localhost:3001",
             "http://127.0.0.1:3000",
             "http://127.0.0.1:3001",
+            "https://asm-1-tasktrack-fe.vercel.app",
             builder.Configuration["FrontendUrl"] ?? "https://your-frontend.vercel.app")
         .AllowAnyHeader()
         .AllowAnyMethod());
