@@ -10,4 +10,6 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends postgresql-client && rm -rf /var/lib/apt/lists/*
 COPY --from=build /app/publish .
 COPY TaskManagementDB_Postgres.sql .
-ENTRYPOINT ["sh", "-c", "ASPNETCORE_URLS=http://0.0.0.0:${PORT:-10000} dotnet TaskTrack.API.dll"]
+COPY TaskTrack.API/entrypoint.sh .
+RUN chmod +x /app/entrypoint.sh
+ENTRYPOINT ["/app/entrypoint.sh"]
